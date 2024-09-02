@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+  <PublishProfile>DefaultContainer</PublishProfile>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+    <ItemGroup>
+        <Using Include="ServiceStack" />
+        <Using Include="TodoApp" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Markdig" Version="0.30.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="6.0.9" />
+        <PackageReference Include="ServiceStack" Version="8.*" />
+        <PackageReference Include="ServiceStack.Blazor" Version="8.*" />
+        <PackageReference Include="ServiceStack.OrmLite.Sqlite.Data" Version="8.*" />
+        <PackageReference Include="ServiceStack.Server" Version="8.*" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\TodoApp.ServiceInterface\TodoApp.ServiceInterface.csproj" />
+        <ProjectReference Include="..\TodoApp.ServiceModel\TodoApp.ServiceModel.csproj" />
+    </ItemGroup>
+
+    <Target Name="CreateAppDataFolderBuild" AfterTargets="AfterBuild">
+      <MakeDir Directories="$(BuildDir)App_Data" Condition="!Exists('$(BuildDir)App_Data')" />
+    </Target>
+     
+    <Target Name="CreateAppDataFolder" AfterTargets="AfterPublish">
+        <MakeDir Directories="$(PublishDir)App_Data" Condition="!Exists('$(PublishDir)App_Data')" />
+    </Target>
+
+    <PropertyGroup>
+  <PublishProfile>DefaultContainer</PublishProfile>
+        <ClientDir>$(MSBuildProjectDirectory)/../TodoApp.Client</ClientDir>
+        <WwwRoot>$(ClientDir)/wwwroot</WwwRoot>
+        <TestsDir>$(MSBuildProjectDirectory)/../TodoApp.Tests</TestsDir>
+        <PackAsTool>False</PackAsTool>
+    </PropertyGroup>
+</Project>

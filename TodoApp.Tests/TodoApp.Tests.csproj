@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <DebugType>portable</DebugType>
+        <OutputType>Library</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="appsettings.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\TodoApp.ServiceInterface\TodoApp.ServiceInterface.csproj" />
+        <ProjectReference Include="..\TodoApp.ServiceModel\TodoApp.ServiceModel.csproj" />
+        <ProjectReference Include="..\TodoApp\TodoApp.csproj" />
+
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
+        <PackageReference Include="NUnit" Version="3.*" />
+        <PackageReference Include="NUnit3TestAdapter" Version="4.*" />
+        <PackageReference Include="coverlet.collector" Version="3.*" />
+        <PackageReference Include="bunit" Version="1.4.*" />
+
+        <PackageReference Include="ServiceStack" Version="8.*" />
+        <PackageReference Include="ServiceStack.Kestrel" Version="8.*" />
+    </ItemGroup>
+
+</Project>
